@@ -1,4 +1,4 @@
-import LoginPage from './views/LoginPage.tsx'
+import LoginPage from './pages/LoginPage.tsx'
 import './App.css'
 
 function App() {

@@ -9,7 +9,7 @@ const LoginPage = () => {
   }
   return (
     <main className='flex h-full justify-center items-center'>
-      <section className='h-[80%] w-[55%] flex rounded-xl shadow-xl overflow-hidden'>
+      <section className='h-[80%] min-w-[55%] flex rounded-xl shadow-xl overflow-hidden'>
         <div className='flex w-1/2'>
           <img
             src='https://images.pexels.com/photos/3997813/pexels-photo-3997813.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
