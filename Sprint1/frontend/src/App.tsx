@@ -1,7 +1,12 @@
+import LoginPage from './views/LoginPage.tsx'
 import './App.css'
 
 function App() {
-  return <></>
+  return (
+    <>
+      <LoginPage />
+    </>
+  )
 }
 
 export default App
