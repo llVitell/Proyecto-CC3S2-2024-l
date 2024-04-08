@@ -4,5 +4,6 @@ Integrantes
 - Canales Yarin Edward Alexander
 - Vite Allca Omar Baldomero
 
-Plataforma para seguir la metodología SCRUM
+Plataforma utilizada para seguir la metodología SCRUM
+
 https://sharing.clickup.com/9013192166/l/h/6-901302919544-1/9435a33d3080b27
