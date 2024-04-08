@@ -22,7 +22,7 @@ const LoginForm = () => {
     const data = await response.json()
     if (response.ok) {
       console.log(data.message)
-      navigate('/home')
+      navigate('/')
     }
   }
 

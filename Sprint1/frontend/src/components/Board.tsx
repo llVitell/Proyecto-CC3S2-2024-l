@@ -3,6 +3,8 @@ import { PieceString } from '../utils/types';
 import { BOARD_SIZE, initializeBoard } from '../utils/constants';
 import { Piece } from '../model/piece';
 import PieceDiv from './Piece';
+import Button from './Button';
+import { useNavigate } from 'react-router-dom';
 
 const Board: React.FC = () => {
     const [board, setBoard] = useState<Piece[][]>(initializeBoard());
@@ -18,7 +20,7 @@ const Board: React.FC = () => {
     const [winnerPlayer, setWinnerPlayer] = useState<PieceString>("none");
 
     const oppositePlayer = (currentPlayer: PieceString) => (currentPlayer === "red") ? "black" : "red";
-
+    const navigate = useNavigate()
     // Funcion para ver si se puede hacer movimientos multiples
     const handleMultipleCaptures = (rowIndex: number, colIndex: number) => {
         let hasMoreCaptures: boolean = false;
@@ -272,9 +274,23 @@ const Board: React.FC = () => {
 
 
     // functions
-    const handleLogOut = () => {
-        console.log("funcion log out");
-    }
+    const handleLogOut = async () => {
+        try {
+            const response = await fetch('http://127.0.0.1:5000/api/logout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            const data = await response.json();
+            if (response.ok) {
+                console.log(data.message)
+                navigate('/')
+            }
+        } catch (error) {
+            console.error('Error al cerrar sesión:', error);
+        }
+    };
 
     const handleSendStatsToThisUserAndResetGame = (winner: PieceString) => {
         // funciones de registro de victoria
@@ -296,13 +312,8 @@ const Board: React.FC = () => {
         <>
             <header className="shadow-md w-full">
                 <nav className="flex items-center justify-between bg-white py-3 nr:px-10 px-7">
-                    <div className='text-2xl flex items-center text-gray-800 font-bold'>Damas</div>
-                    <div className='flex flex-col'>
-                        <p className="mb-0.5 text-sm text-sky-500 font-medium">Are you sure?</p>
-                        <div onClick={handleLogOut} className='w-[6.75rem] p-1.5 cursor-pointer rounded-md border border-gray-600 flex flex-row gap-x-1.5'>
-                            <p className='text-sm dark:text-gray-300'>Log Out</p>
-                        </div>
-                    </div>
+                    <div className='text-2xl flex items-center text-gray-800 font-bold'>Juego de Damas</div>
+                    <Button onClick={handleLogOut} text='Log Out'></Button>
                 </nav>
 
             </header>
