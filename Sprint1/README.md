@@ -1,38 +1,53 @@
 # Reporte del Sprint 1
+## I) Microcarta
 
-## HISTORIAS DE USUARIOS
+## II) HISTORIAS DE USUARIOS
 
 | ID | Nombre de la  historia de usuario | Descripción de la historia de usuario | Prioridad              | Esfuerzo Estimado | Esfuerzo real | Estado | Desarrollador |
 |:--:|:---------------------------------:|:-------------------------------------:|:----------------------:|:-----------------:|:-------------:|:------:|:-------------:|
-| 1 | Iniciar sesión                    | Como usuario, necesito iniciar sesión para poder acceder a la plataforma del juego de  XXX.| ALTO | 3.5 horas | 5 horas | En curso | Piero Pilco |
-| 2 | Registro cuenta de usuario        | Como nuevo usuario, es necesario que mi cuenta se cree para que con esta pueda iniciar sesión. necesito crear una cuenta para que con esa misma pueda iniciar sesión.| ALTO | 3 horas | 5 horas | En curso | - |       
-| 3 | Cierre de sesión                  | Como usuario, necesito poder cerrar sesión para evitar accesos no autorizados si dejo mi sesión abierta accidentalmente.| ALTO | 2 horas | 3 horas | En curso | -  |
-| 5 | Juego multijugador                 | Como usuario, necesito poder jugar contra otros usuarios via online para disfrutar la experiencia multijugador.| MEDIO | 48 horas | 72 horas | Pendiente | No definido |
-| 7 | Juego vs CPU                    | Como usuario, tengo que poder jugar contra la CPU para practicar mis habilidades. | MEDIO | 48 horas | 72 horas | Pendiente | - |
-| 8 | Juego 1 vs 1 Local                       | Como jugador, necesito la capacidad de jugar al juego de damas contra otro usuario en la misma ubicación física para una partida multijugador local.| ALTO | 24 horas | 48 horas | Pendiente | - |
-
+| 1 | Iniciar sesión                    | Como usuario, necesito iniciar sesión para poder acceder a la plataforma del juego de damas | alto | 3.5 | 5 | Completado | Omar Vite |
+| 2 | Registro de cuenta de usuario        | Como nuevo usuario, necesito registrarme para crearme una cuenta. | alto | 3  | 5 | Completado | Omar Vite |       
+| 3 | Cierre de sesión  | Como usuario, necesito poder cerrar sesión para evitar accesos no autorizados a mi cuenta.| alto | 3  | - | Completado | Omar Vite |
+| 4 | Visualización del tablero 8x8 | Como programador, mostrar un tablero de ajedrez para el inicio de una partida de damas.| alto | 10 | 24 horas | Completado | Piero Pilco, Edward Canales |
+| 5 | Elección del modo de juego | Como usuario, necesito elegir el modo de juego para iniciar la partida | medio | 10 | -  | Pendiente | Piero Pilco |
+| 6 | Asignación de turno | Como jugador, necesito saber cuando es mi turno para realizar un movimiento. | medio | 5 | - | Pendiente | Piero Pilco |
+| 7 | Una partida ha terminado | Como jugador, necesito saber cuando ha terminado una partida | bajo | 6 | - | Pendiente | Piero Pilco, Omar Vite, Edward Canales |
+| 8 | Conteo de piezas atrapadas | Como programador, necesito contabilizar las piezas atrapadas para | bajo | 8 | - | Pendiente | Piero Pilco, Omar Vite, Edward Canales |
+| 9 | Ninguna pieza atrapada en un turno | Como programador, necesito mostrar en el tablero la misma cantidad de piezas antes y después de un turno donde no se capturó ninguna pieza.| bajo | 6 | - | Pendiente | Piero Pilco|
+| 10 | Captura de una pieza en un turno | Como programador, necesito mostrar en el tablero una pieza menos después de un turno donde se capturó una pieza | bajo | 8 | - | Pendiente | Omar Vite |
+| 11 | Captura de más de una pieza en un turno | Como programador, necesito mostrar n piezas menos (n es la cantidad de piezas capturadas y mayor a 1) después de un turno donde se capturó n piezas | bajo | 24 | - | Pendiente | Piero Pilco, Omar Vite, Edward Canales |
+| 12 | Coronación de una pieza | Como programador, necesito mostrar una pieza coronada cuando en un turno una pieza llega a la fila más lejana respecto a su posición al inicio del juego. | bajo | 15 | - | Pendiente | Piero Pilco, Omar Vite, Edward Canales |
+| 13 | Movimiento de una pieza simple | Como jugador, necesito mover una pieza simple en un turno. | bajo | 12 | - | Pendiente | Edward Canales |
+| 14 | Movimiento de una pieza coronada | Como jugador, necesito mover una pieza coronada en un turno. | bajo | 24 | - | Pendiente | Piero Pilco, Omar Vite, Edward Canales |
                              
 
-## CRITERIOS DE ACEPTACION(AC)
+## III) CRITERIOS DE ACEPTACION(AC)
 
 | ID y nombre de la lista de usuario | AC  ID | Descripcion del criterio de aceptacion | Estado | Desarrollador |
 |:----------------------------------:|:------:|:--------------------------------------:|:------------------------------------------:|:-------------:|
-| 1 Iniciar sesión             | 1.1 | Inicio de sesión exitoso con credenciales válidas. Dado un username y una contraseña asociada, cuando inicie sesión con estas credenciales entonces el sistema debería permitirme acceder al juego. | En progreso | - |
-| 1 Iniciar sesión             | 1.2 | Error del inicio de sesión por username inexistente. Dado un username inexistente  Cuando intente iniciar sesión con este dato, Y cualquier contraseña Entonces todavía no debería permitirme acceder al juego. Y mostrar un mensaje de error "Usuario no existe" y un botón de crear usuario (opcional).| En progreso | - |
-| 1 Iniciar sesión             | 1.3 | Error de inicio de sesión por contraseña no correspondiente. Dado un username valido Cuando se pone en el login una contraseña la cual no le corresponde a este usuario. Entonces al intentar iniciar sesión con estas credenciales el sistema todavia no debería permitirme acceder al juego. Y debería mostrar una alerta de error indicando "La contraseña es erronea".| En progreso | - |
-| 1 Iniciar sesión             | 1.4 | Protección contra excesivos intentos de inicio de sesión. Dado un username valido. Cuando se realizan múltiples intentos de inicio de sesión con contraseñas no correspondentes Entonces el sistema debería bloquear temporalmente el acceso a la cuenta una vez que se supere el limite de intentos fallidos. Y debería mostrar una alerta al usuario indicando que se bloquea temporalmente el acceso por exceder el numero de intentos.| En progreso | - |
-| 2 Registro cuenta de usuario | 2.1 | Creación exitosa de una username válida. Dado un username inexistente Cuando creo una cuenta con este username Y una contraseña válida que coincida con la contraseña confirmada Y una dirección de correo electrónico Entonces el sistema debería crear una nueva cuenta. Y mostrar un mensaje de "Registro exitoso".| En progreso | - |
-| 2 Registro cuenta de usuario | 2.2 | Creación de una cuenta fallida con un username existente. Dado un username que ya existe, cuando creo una cuenta con este username Y una contraseña válida que coincida con la contraseña confirmada Y una dirección de correo electrónica valida Entonces el sistema no deberían crear una nueva cuenta Y debería mostrar un mensaje de error de "el username ya existe"| En progreso | - |
-| 2 Registro cuenta de usuario | 2.3 | Creación de una cuenta fallida con una contraseña no válida. Dado un username válido Cuando creo una cuenta con este username Y una contraseña no válida Y la misma contraseña que coincida con la contraseña reingresada Y una dirección de correo electrónico no válida Entonces no se crea la nueva cuenta. Y el sistema debería mostrar mensajes de error diciendo "credenciales invalidas"| En progreso | - |
-| 2 Registro cuenta de usuario | 2.4 | Prevención de creación de cuentas con información maliciosa. Dado un username no válido malicioso, una contraseña válida y una dirección de correo electrónico válida Cuando intento crear una cuenta con estos datos Entonces el sistema debería rechazar la creación de la cuenta.| En progreso | - |
-| 3 Cierre de sesión | 3.1 | Cierre de sesión exitoso. Dado la sesión abierta. Cuando selecciono la opción de Cerrar Sesión. Entonces el sistema debería cerrar mi sesión actual y redirigirme a la página de inicio de sesión automaticamente. | En progreso | - |
-| 3 Cierre de sesión | 3.2 | No acceso después del cierre de sesión. Dado que he cerrado sesión en mi cuenta Cuando intento acceder a páginas restringidas que requieren inicio de sesión Entonces el sistema no debería permitirme acceder a esas páginas. Y debería redirigirme a la página de inicio de sesión con un mensaje de "Debes inciar sesión primero".| En progreso |  |
-| 5 -        |    | | |
-| 6 Juego Multijudaor          |    | | |
-| 7 Juego con bot              |    | | |
-| 8 Juego Local                |    | | |
+| 1 Iniciar sesión             | 1.1 | AC 1.1 <Inicio de sesión exitoso>  Dado un usuario cuando ingresa un ID y contraseña correcta. Entonces el sistema le muestra la interfaz de inicio del juego. | Completado | Omar Vite |
+|                              | 1.2 | AC 1.2 <Inicio de sesión fallido>  Dado un jugador cuando ingresa un ID o contraseña incorrecta. Entonces el sistema le muestra un mensaje de error y no le muestra la interfaz de inicio del juego. | Completado | Omar Vite |
+| 2. Registro de cuenta de usuario | 2.1 | AC 2.1 <Registro de cuenta de usuario exitoso> Dado un usuario cuando se registra con datos válidos. Entonces el sistema le muestra un mensaje de registro exitoso. | Completado | Omar Vite |
+|                                  | 2.2 | AC 2.1 <Registro de cuenta de usuario fallido> Dado un usuario cuando se registra con datos no válidos. Entonces el sistema le muestra un mensaje de registro fallido. | Completado | Omar Vite |
+| 3. Cierre de sesión | 3.1 | AC 3.1 <Sesión cerrada> Dado un usuario cuando da click en el botón de cierre de sesión. Entonces la sesión se cierra.| Completado | Omar Vite |
+| 4. Visualización del tablero 8x8 | 4.1 | AC 4.1 <Tablero 8x8 de inicio de partida> Dado un jugador cuando ya seleccionó el modo de juego y le da click a “empezar”. Entonces se muestra un tablero de ajedrez con las fichas colocadas para el inicio de la partida. | Completado | Piero Pilco, Edward Canales |
+| 5. Elección del modo de juego | 5.1 | AC 5.1 <Modo de juego online> Dado un jugador cuando selecciona el modo de juego online. Entonces se crea una partida en modo de juego online. | Pendiente | Piero Pilco |
+|                               | 5.2 | AC 5.2 <Modo de juego contra la máquina> Dado un jugador cuando selecciona el modo de juego contra la máquina. Entonces se crea una partida en modo de juego contra la máquina.| Pendiente | Piero Pilco |
+|                               | 5.3 | AC 5.3 <Modo de juego cara a cara> Dado un jugador cuando selecciona el modo de juego cara a cara. Entonces se crea una partida en modo de juego cara a cara.| Pendiente | Piero Pilco |
+| 6. Asignación de turno | 6.1 | AC 6.1 <Turno asignado exitoso> Dado un jugador X cuando el jugador Y termina su turno. Entonces el sistema debe habilitar el movimiento del jugador X. | Pendiente | Piero Pilco |
+|                        | 6.2 | AC 6.2 <Turno asignado fallido> Dado un jugador X cuando el jugador Y aún no termina su turno. Entonces el sistema no debe habilitar el movimiento del jugador X. | Pendiente | Piero Pilco |
+|7. Una partida ha terminado | 7.1 | AC 7.1 <Una partida terminó con un ganador> Dado un jugador X cuando es el turno del jugador Y y no le queda ninguna pieza por mover o se queda sin piezas. Entonces el juego termina y el jugador X gana la partida.| Pendiente | Piero Pilco, Omar Vite, Edward Canales |
+|                            | 7.2 | AC 7.2 <Una partida terminó con un empate> Dado un turno cuando a ambos jugadores les queda solo una pieza. Entonces el juego termina en empate.| Pendiente | Piero Pilco, Omar Vite, Edward Canales |
+|                            | 7.3 | AC 7.3 <Una partida terminó por rendirse> Dado un jugador X cuando es el turno del jugador Y y da click en el botón rendirse. Entonces el juego termina y el jugador X gana la partida.| Pendiente | Piero Pilco, Omar Vite, Edward Canales |
+| 8. Conteo de pieza atrapadas | 8.1 | AC 8.1 <Cantidad de piezas atrapadas> Dado un jugador X cuando termina su turno. Entonces debe visualizar la cantidad de piezas que atrapó | Pendiente | Piero Pilco, Omar Vite, Edward Canales |
+| 9. Ninguna pieza atrapada en un turno | 9.1 | AC 9.1 <Cero piezas atrapadas> Dado un jugador X cuando termina su turno y no atrapó ninguna pieza durante dicho turno. Entonces el sistema debe mostrar la misma cantidad de piezas en el tablero antes y después del turno del jugador X.| Pendiente | Piero Pilco |
+| 10. Captura de una pieza en un turno | 10.1 | AC 10.1 <Una pieza atrapada> Dado un jugador X cuando termina su turno y ha atrapado una pieza durante dicho turno. Entonces el sistema debe mostrar una pieza menos después del turno del jugador X| Pendiente | Omar Vite |
+| 11. Captura de más de una pieza en un turno | 11.1 | AC 11.1 <Más de una pieza atrapada> Dado un jugador X cuando termina su turno y ha atrapado n piezas (n es mayor que 1) durante dicho turno. Entonces el sistema debe mostrar n piezas menos después del turno del jugador X | Pendiente | Piero Pilco, Omar Vite, Edward Canales |
+| 12. Coronación de una pieza | 12.1 | AC 12.1 <Pieza coronada> Dado un jugador X cuando en su turno llega colocar una de sus piezas en la fila más lejana respecto de su posición inicial. Entonces el sistema de que dicha pieza fue coronada | Pendiente | Piero Pilco, Omar Vite, Edward Canales |
+| 13. Movimiento de una pieza simple | 13.1 | AC 13.1 <Movimiento de pieza simple> Dado un jugador X cuando en su turno mueve una pieza simple. Entonces el sistema solo le debe permitir mover la pieza, dentro del tablero, hacia adelante en diagonal y respetando las reglas de movimiento de una pieza simple.| Pendiente | Edward Canales |
+| 14. Movimiento de una pieza coronada | 14.1 | AC 14.1 <Movimiento de pieza coronada> Dado un jugador X cuando en su turno mueve una pieza coronada. Entonces el sistema le debe permitir mover la pieza, dentro del tablero, hacia adelante o atrás en diagonal y respetando las reglas de movimiento de una pieza coronada.| Pendiente | Piero Pilco, Omar Vite, Edward Canales |
 
-## TAREAS DE IMPLEMENTACION
+## IV) TAREAS DE IMPLEMENTACIÓN
 Resumen del codigo de produccion.
 
 | ID y nombre de la lista de usuario | AC  ID | Nombre(s) de clase | Nombre(s) del metodo | Desarrollador | Estado | Notas(op cional) |
@@ -69,7 +84,7 @@ Resumen de otras pruebas automatizadas o manuales (que no corresponden a los cri
 |        |                   |                    |                                       |                                        |        |               |
 |        |                   |                    |                                       |                                        |        |               |
 
-## ACTA DE REUNION
+## V) ACTA DE REUNIÓN
 
 | Fecha | Tiempo y duracion | Lugar | Participante | Proposito de la reunion | Elementos de accion especificos |
 |:-----:|:-----------------:|:-----:|:------------:|:-----------------------:|---------------------------------|
@@ -77,3 +92,12 @@ Resumen de otras pruebas automatizadas o manuales (que no corresponden a los cri
 |       |                   |       |              |                         |                                 |
 |       |                   |       |              |                         |                                 |
 |       |                   |       |              |                         |                                 |
+
+## VI) CALIFICACIONES DE AMIGOS
+|    | Edward Alexander Canales Yarin | Piero Fernando Pilco Reynoso | Omar Baldomero Vite Allca | 
+|:--:|:---------------------------------:|:-------------------------------------:|:----------------------:|
+| Edward Alexander Canales Yarin | 19                    | 19                     | 19                    | 
+| Piero Fernando Pilco Reynoso | 19                    | 19                     | 19                    | 
+| Omar Baldomero Vite Allca | 19                    | 19                     | 19                    | 
+| Promedio | 19                    | 19                     | 19                    | 
+
