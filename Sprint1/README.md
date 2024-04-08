@@ -1,6 +1,30 @@
 # Reporte del Sprint 1
 ## I) Microcarta
+**Título del Proyecto:** Juego de Damas Online
 
+- **Visión**
+  
+  Crear una plataforma que permita a los usuarios disfrutar del clásico juego de damas de manera interactiva y competitiva, fomentando la diversión y el aprendizaje estratégico, tanto en partidas individuales como en modo multijugador.
+
+- **Alcance**
+  
+  1. Desarrollar una aplicación web compatible con diferentes dispositivos.
+  2. Incluir funcionalidades para jugar partidas individuales, multijugador y contra la inteligencia artificial.
+  3. Implementar sesiones de usuario para así tener una experiencia más única.
+  
+- **Objetivos**
+  
+  1. Lanzar una versión beta de la aplicación en 2 meses.
+  2. Alcanzar una cantidad considerable de usuarios activos en los primeros 3 meses después del lanzamiento.
+  3. Lograr una calificación promedio de 4.7 estrellas en las calificaciones de los usuarios dentro de los primeros 6 meses.
+  
+- **Partes Interesadas**
+  
+  1. Equipo de Desarrollo de Software
+  2. Equipo de Diseño de Interfaz de Usuario
+  3. Jugadores de Damas En Línea
+  4. Departamento laboral
+  
 ## II) HISTORIAS DE USUARIOS
 
 | ID | Nombre de la  historia de usuario | Descripción de la historia de usuario | Prioridad              | Esfuerzo Estimado | Esfuerzo real | Estado | Desarrollador |
