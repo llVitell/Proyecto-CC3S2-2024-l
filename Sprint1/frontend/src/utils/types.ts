@@ -1,0 +1,1 @@
+export type PieceString = 'none' | 'red' | 'black' | 'red-king' | 'black-king' ;
