@@ -112,10 +112,9 @@ Resumen de otras pruebas automatizadas o manuales (que no corresponden a los cri
 
 | Fecha | Tiempo y duracion | Lugar | Participante | Proposito de la reunion | Elementos de accion especificos |
 |:-----:|:-----------------:|:-----:|:------------:|:-----------------------:|---------------------------------|
-|       |                   |       |              |                         |                                 |
-|       |                   |       |              |                         |                                 |
-|       |                   |       |              |                         |                                 |
-|       |                   |       |              |                         |                                 |
+| 01/04/2024 | 2h                    | Google Meet | Piero, Edward, Omar | Establecer los requerimientos del proyecto así como evaluar el valor de esfuerzo que le tomaría a cada miembro hacer tareas particulares mediante el juego poker | -Plantear historias de usuario -Plantear criterios de aceptación -Definir roles y tareas principales | 
+| 03/04/2024 | 3h                    | Biblioteca FC | Piero, Edward, Omar | Definir tecnologías a usar y también establecer el uso de la plataforma ClickUp para acercanos a la metodología SCRUM | -Crear entorno de desarrollo front (ts + js) -Conexión al back (python + MySql + WebSockets) | 
+| 05/04/2024| 1h                  | Biblioteca FC | Piero, Edward, Omar |Coordinar fechas de las siguientes reuniones, conversar sobre los avances del proyecto y redefinir las historias de usario y criterios de aceptación | - Coordinar fechas de reuniones - Reunión de retroalimentación -  backlog grooming |
 
 ## VI) CALIFICACIONES DE AMIGOS
 |    | Edward Alexander Canales Yarin | Piero Fernando Pilco Reynoso | Omar Baldomero Vite Allca | 
