@@ -10,11 +10,8 @@ PILCANVIT
 Reportar el acta de cada reunión.
 | Fecha | Tiempo y duración | Lugar | Nombres de los participantes              | Propósito de la reunión | Elementos de acción específicos | 
 |:--:|:---------------------------------:|:-------------------------------------:|:----------------------:|:-----------------:|:-------------:|
-| 01/04/2024 | 2h                    | Google Meet | Piero, Edward, Omar | Establecer los requerimientos del proyecto así como evaluar el valor de esfuerzo que le tomaría a cada miembro hacer tareas particulares mediante el juego poker | -Plantear historias de usuario
--Plantear criterios de aceptación
--Definir roles y tareas principales | 
-| 03/04/2024 | 3h                    | Biblioteca FC | Piero, Edward, Omar | Definir tecnologías a usar y también establecer el uso de la plataforma ClickUp para acercanos a la metodología SCRUM | -Crear entorno de desarrollo front (ts + js)
--Conexión al back (python + MySql + WebSockets) | 
+| 01/04/2024 | 2h                    | Google Meet | Piero, Edward, Omar | Establecer los requerimientos del proyecto así como evaluar el valor de esfuerzo que le tomaría a cada miembro hacer tareas particulares mediante el juego poker | -Plantear historias de usuario -Plantear criterios de aceptación -Definir roles y tareas principales | 
+| 03/04/2024 | 3h                    | Biblioteca FC | Piero, Edward, Omar | Definir tecnologías a usar y también establecer el uso de la plataforma ClickUp para acercanos a la metodología SCRUM | -Crear entorno de desarrollo front (ts + js) -Conexión al back (python + MySql + WebSockets) | 
 
 ## Decisiones clave
 **Lenguaje de programación:** Typescript (logica & frontend) + Javascript (testing) + Python (backend)
