@@ -35,3 +35,4 @@ Si no se siente cómodo al incluir sus calificaciones en este informe, puede env
 | Edward Alexander Canales Yarin | 19                    | 19                     | 19                    | 
 | Piero Fernando Pilco Reynoso | 19                    | 19                     | 19                    | 
 | Omar Baldomero Vite Allca | 19                    | 19                     | 19                    | 
+| Promedio | 19                    | 19                     | 19                    | 
