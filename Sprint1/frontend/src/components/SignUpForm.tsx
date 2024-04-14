@@ -1,12 +1,11 @@
 import { useState } from 'react'
 import Button from './Button'
-import { useNavigate } from 'react-router-dom'
 
 const LoginForm = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [email, setEmail] = useState('')
-  const navigate = useNavigate()
+
   const handleSignUp = async () => {
     const response = await fetch('http://localhost:5000/api/register', {
       method: 'POST',
@@ -22,7 +21,6 @@ const LoginForm = () => {
     const data = await response.json()
     if (response.ok) {
       console.log(data.message)
-      navigate('/')
     }
   }
 
