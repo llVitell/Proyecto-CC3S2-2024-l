@@ -4,9 +4,10 @@ import { BOARD_SIZE, initializeBoard } from '../utils/constants'
 import { Piece } from '../model/piece'
 import PieceDiv from './Piece'
 import Button from './Button'
-import { useNavigate } from 'react-router-dom'
+import LogOut from '../model/useLogOut'
 
 const Board: React.FC = () => {
+  const logOut = new LogOut()
   const [message, setMessage] = useState('')
 
   const [board, setBoard] = useState<Piece[][]>(initializeBoard())
@@ -31,7 +32,6 @@ const Board: React.FC = () => {
 
   const oppositePlayer = (currentPlayer: PieceString) =>
     currentPlayer === 'red' ? 'black' : 'red'
-  const navigate = useNavigate()
 
   const fetchBoardMessage = async () => {
     const response = await fetch('http://127.0.0.1:5000/api/board', {
@@ -358,25 +358,6 @@ const Board: React.FC = () => {
     setValidMoves(validMovesForPiece)
   }
 
-  // functions
-  const handleLogOut = async () => {
-    try {
-      const response = await fetch('http://127.0.0.1:5000/api/logout', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-      const data = await response.json()
-      if (response.ok) {
-        console.log(data.message)
-        navigate('/')
-      }
-    } catch (error) {
-      console.error('Error al cerrar sesión:', error)
-    }
-  }
-
   const handleSendStatsToThisUserAndResetGame = (winner: PieceString) => {
     // funciones de registro de victoria
     if (winner !== 'none') {
@@ -401,7 +382,7 @@ const Board: React.FC = () => {
           <div className='text-2xl flex items-center text-gray-800 font-bold'>
             Juego de Damas
           </div>
-          <Button onClick={handleLogOut} text='Log Out'></Button>
+          <Button onClick={() => logOut.handleLogOut()} text='Log Out'></Button>
         </nav>
       </header>
 

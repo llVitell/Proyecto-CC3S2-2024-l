@@ -1,28 +1,8 @@
-import { useState } from 'react'
 import Button from './Button'
-import { useNavigate } from 'react-router-dom'
+import SignIn from '../model/useSignIn'
 
 const SignInForm = () => {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const navigate = useNavigate()
-  const handleLogin = async () => {
-    const response = await fetch('http://localhost:5000/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        username: username,
-        password: password
-      })
-    })
-    const data = await response.json()
-    if (response.ok) {
-      console.log(data.message)
-      navigate('/board')
-    }
-  }
+  const signIn = new SignIn()
 
   return (
     <div className='w-full flex flex-col gap-10 items-center'>
@@ -31,18 +11,16 @@ const SignInForm = () => {
           <label>Usuario</label>
           <input
             type='text'
-            value={username}
             className='border-2 border-slate-300 h-10 rounded-lg px-4'
-            onChange={e => setUsername(e.target.value)}
+            onChange={e => signIn.setUsername(e.target.value)}
           />
         </div>
         <div className='flex flex-col gap-1 w-full'>
           <label>Contraseña</label>
           <input
             type='password'
-            value={password}
             className='border-2 border-slate-300 h-10 rounded-lg px-4'
-            onChange={e => setPassword(e.target.value)}
+            onChange={e => signIn.setPassword(e.target.value)}
           />
         </div>
         <div className='flex w-full justify-end text-sm text-blue-400'>
@@ -50,7 +28,11 @@ const SignInForm = () => {
         </div>
       </form>
       <div className='flex flex-col w-full justify-center items-center'>
-        <Button onClick={handleLogin} text='Iniciar Sesión' width='w-full' />
+        <Button
+          onClick={() => signIn.handleLogin()}
+          text='Iniciar Sesión'
+          width='w-full'
+        />
       </div>
     </div>
   )
