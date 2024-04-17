@@ -14,7 +14,7 @@ const router = createBrowserRouter([
   {
     path: '/board',
     element: <Board />
-  },
+  }
 ])
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

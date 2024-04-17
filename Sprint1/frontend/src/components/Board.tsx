@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { PieceString } from '../utils/types'
 import { BOARD_SIZE, initializeBoard } from '../utils/constants'
 import { Piece } from '../model/piece'
@@ -6,9 +6,8 @@ import PieceDiv from './Piece'
 import Button from './Button'
 import LogOut from '../model/useLogOut'
 
-const Board: React.FC = () => {
+const Board = () => {
   const logOut = new LogOut()
-  const [message, setMessage] = useState('')
 
   const [board, setBoard] = useState<Piece[][]>(initializeBoard())
   // casilla seleccionada
@@ -32,22 +31,6 @@ const Board: React.FC = () => {
 
   const oppositePlayer = (currentPlayer: PieceString) =>
     currentPlayer === 'red' ? 'black' : 'red'
-
-  const fetchBoardMessage = async () => {
-    const response = await fetch('http://127.0.0.1:5000/api/board', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      credentials: 'include'
-    })
-    const data = await response.json()
-    if (response.ok) {
-      setMessage(data.message)
-    }
-  }
-
-  fetchBoardMessage()
 
   // Funcion para ver si se puede hacer movimientos multiples
   const handleMultipleCaptures = (rowIndex: number, colIndex: number) => {
@@ -374,7 +357,6 @@ const Board: React.FC = () => {
     setWinnerPlayer('none')
   }
 
-  console.log(message)
   return (
     <>
       <header className='shadow-md w-full'>
@@ -409,10 +391,7 @@ const Board: React.FC = () => {
                                     lg:w-16 lg:h-16            
                                 `}
                   key={`${rowIndex}-${colIndex}`}
-                  onClick={
-                    () => handleIsStillTheMatch(rowIndex, colIndex)
-                    //    () => handleSquareClick(rowIndex, colIndex)
-                  }
+                  onClick={() => handleIsStillTheMatch(rowIndex, colIndex)}
                   style={{
                     backgroundColor: validMoves.some(
                       move => move.row === rowIndex && move.col === colIndex
