@@ -1,8 +1,8 @@
 import Button from './Button'
-import SignIn from '../model/useSignIn'
+import Session from '../model/session.ts'
 
 const SignInForm = () => {
-  const signIn = new SignIn()
+  const session = new Session()
 
   return (
     <div className='w-full flex flex-col gap-10 items-center'>
@@ -12,7 +12,7 @@ const SignInForm = () => {
           <input
             type='text'
             className='border-2 border-slate-300 h-10 rounded-lg px-4'
-            onChange={e => signIn.setUsername(e.target.value)}
+            onChange={e => session.setUsername(e.target.value)}
           />
         </div>
         <div className='flex flex-col gap-1 w-full'>
@@ -20,7 +20,7 @@ const SignInForm = () => {
           <input
             type='password'
             className='border-2 border-slate-300 h-10 rounded-lg px-4'
-            onChange={e => signIn.setPassword(e.target.value)}
+            onChange={e => session.setPassword(e.target.value)}
           />
         </div>
         <div className='flex w-full justify-end text-sm text-blue-400'>
@@ -29,7 +29,7 @@ const SignInForm = () => {
       </form>
       <div className='flex flex-col w-full justify-center items-center'>
         <Button
-          onClick={() => signIn.handleLogin()}
+          onClick={() => session.signIn()}
           text='Iniciar Sesión'
           width='w-full'
         />

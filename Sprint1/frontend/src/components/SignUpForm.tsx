@@ -1,8 +1,9 @@
-import SignUp from '../model/useSignUp'
+import Session from '../model/session'
+
 import Button from './Button'
 
 const LoginForm = () => {
-  const signUp = new SignUp()
+  const session = new Session()
   return (
     <div className='w-full flex flex-col gap-10 items-center'>
       <form className='flex flex-col w-full text-gray-600 gap-3 items-start'>
@@ -11,7 +12,7 @@ const LoginForm = () => {
           <input
             type='text'
             className='border-2 border-slate-300 h-10 rounded-lg px-4'
-            onChange={e => signUp.setUsername(e.target.value)}
+            onChange={e => session.setUsername(e.target.value)}
           />
         </div>
         <div className='flex flex-col gap-1 w-full'>
@@ -19,7 +20,7 @@ const LoginForm = () => {
           <input
             type='email'
             className='border-2 border-slate-300 h-10 rounded-lg px-4'
-            onChange={e => signUp.setEmail(e.target.value)}
+            onChange={e => session.setEmail(e.target.value)}
           />
         </div>
         <div className='flex flex-col gap-1 w-full'>
@@ -27,13 +28,13 @@ const LoginForm = () => {
           <input
             type='password'
             className='border-2 border-slate-300 h-10 rounded-lg px-4'
-            onChange={e => signUp.setPassword(e.target.value)}
+            onChange={e => session.setPassword(e.target.value)}
           />
         </div>
       </form>
       <div className='flex flex-col w-full justify-center items-center'>
         <Button
-          onClick={() => signUp.handleRegister()}
+          onClick={() => session.signUp()}
           text='Registrarse'
           width='w-full'
         />

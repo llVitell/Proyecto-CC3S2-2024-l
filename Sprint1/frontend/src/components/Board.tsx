@@ -4,10 +4,10 @@ import { BOARD_SIZE, initializeBoard } from '../utils/constants'
 import { Piece } from '../model/piece'
 import PieceDiv from './Piece'
 import Button from './Button'
-import LogOut from '../model/useLogOut'
+import Session from '../model/session'
 
 const Board = () => {
-  const logOut = new LogOut()
+  const session = new Session()
 
   const [board, setBoard] = useState<Piece[][]>(initializeBoard())
   // casilla seleccionada
@@ -364,7 +364,7 @@ const Board = () => {
           <div className='text-2xl flex items-center text-gray-800 font-bold'>
             Juego de Damas
           </div>
-          <Button onClick={() => logOut.handleLogOut()} text='Log Out'></Button>
+          <Button onClick={() => session.logOut()} text='Log Out'></Button>
         </nav>
       </header>
 
