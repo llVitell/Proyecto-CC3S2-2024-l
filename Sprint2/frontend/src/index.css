@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#root {
+  @apply h-screen;
+}
+html {
+  font-family: 'Poppins', sans-serif;
+  box-sizing: border-box;
+}
+body {
+  @apply w-screen h-screen bg-gradient-to-br from-stone-400 via-stone-300 to-stone-50;
+}
