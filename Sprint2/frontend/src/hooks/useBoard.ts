@@ -11,17 +11,17 @@ export const useBoard = () => {
 
     // Sus atributos:
     // el tablero:
-    const [board, setBoard] = useState<Piece[][]>(boardInfo.getGrid());
+    const [, setBoard] = useState<Piece[][]>(boardInfo.getGrid());
     // casilla seleccionada
-    const [selectedPiece, setSelectedPiece] = useState<SquareInfo | null>(boardInfo.getSelectedPiece());
+    const [, setSelectedPiece] = useState<SquareInfo | null>(boardInfo.getSelectedPiece());
     // movimientos validos
-    const [validMoves, setValidMoves] = useState<SquareInfo[]>(boardInfo.getValidMovesList());
+    const [, setValidMoves] = useState<SquareInfo[]>(boardInfo.getValidMovesList());
     // cambiar turno
-    const [turnOwner, setTurnOwner] = useState<PieceString>(boardInfo.getTurnOwner());
+    const [, setTurnOwner] = useState<PieceString>(boardInfo.getTurnOwner());
     // resultados
     //const [capturedPiecesCounter, setCapturedPiecesCounter] = useState<PointCounterInfo>(boardInfo.getCapturedPiecesCounter());
     // el ganador
-    const [winnerPlayer, setWinnerPlayer] = useState<PieceString>(boardInfo.getWinnerPlayer());
+    //const [, setWinnerPlayer] = useState<PieceString>(boardInfo.getWinnerPlayer());
 
 
     const handleIsStillTheMatch = (rowIndex: number, colIndex: number) => {
@@ -37,22 +37,29 @@ export const useBoard = () => {
         }
     }
 
+    const resetTheGame = () => {
+        setBoardObj(new Board());
+        // reset
+        //setCapturedPiecesCounter({red: 0, black: 0});
+        setSelectedPiece(boardObj.getSelectedPiece());
+        setValidMoves(boardObj.getValidMovesList());
+        setTurnOwner(boardObj.getTurnOwner());
+        setBoard(boardObj.getGrid());
+        //setWinnerPlayer(boardObj.getWinnerPlayer());
+
+    }
+
     // Puedes retornar todos los estados y funciones que necesites en tu componente
     return {
         boardObj,
-        board,
-        selectedPiece,
-        validMoves,
-        turnOwner,
-        //capturedPiecesCounter,
-        winnerPlayer,
         handleIsStillTheMatch,
         setBoard,
         setSelectedPiece,
         setValidMoves,
         setTurnOwner,
         //setCapturedPiecesCounter,
-        setWinnerPlayer
+        //setWinnerPlayer,
+        resetTheGame
     };
 
   }

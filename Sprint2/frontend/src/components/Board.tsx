@@ -1,6 +1,5 @@
 import React from 'react';
 import { PieceString } from '../utils/types';
-import { initializeBoard } from '../utils/constants';
 import PieceDiv from './Piece';
 import Button from './Button';
 import { useNavigate } from 'react-router-dom';
@@ -11,11 +10,13 @@ const Board: React.FC = () => {
     const {boardObj, 
         //board, selectedPiece, validMoves, turnOwner, 
         //capturedPiecesCounter, 
-        winnerPlayer, setBoard, setSelectedPiece,
-        setValidMoves,
-        setTurnOwner,
+        //winnerPlayer, setBoard, setSelectedPiece,
+        //setValidMoves,
+        //setTurnOwner,
         //setCapturedPiecesCounter,
-        setWinnerPlayer} = useBoardHook;
+        //setWinnerPlayer,
+        resetTheGame
+    } = useBoardHook;
  
     const navigate = useNavigate()
 
@@ -54,13 +55,7 @@ const Board: React.FC = () => {
             console.log("se registran datos en el servidor");
         }
         
-        // reset
-        setBoard(initializeBoard());
-        //setCapturedPiecesCounter({red: 0, black: 0});
-        setSelectedPiece(null);
-        setValidMoves([]);
-        setTurnOwner('red');
-        setWinnerPlayer('none');
+        resetTheGame();
     }
 
     return (
@@ -117,8 +112,12 @@ const Board: React.FC = () => {
                         ? <div className='my-2 text-green-600'>Please press reset to iniciate other game</div>
                         : null
                     }
-                    <button onClick={() => handleSendStatsToThisUserAndResetGame(winnerPlayer)} className='mt-2 text-blue-400 border-4 py-1.5 px-3 rounded hover:underline text-blue-500 border-green-400'>
-                        Reset Game
+                    <button onClick={() => handleSendStatsToThisUserAndResetGame(boardObj.getWinnerPlayer())} className='mt-2 text-blue-400 border-4 py-1.5 px-3 rounded hover:underline text-blue-500 border-green-400'>
+                        {
+                            (boardObj.getWinnerPlayer() === "none")
+                            ? 'Reset Game'
+                            : 'Submit and Reset'
+                        }
                     </button>
                 </section>
             </main>

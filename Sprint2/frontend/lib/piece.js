@@ -1,7 +1,7 @@
 class Piece {
-  constructor(color) {
+  constructor(color, isKing = false) {
       this.color = color;
-      this.isKing = false;
+      this.isKing = isKing;
   }
 
   getColor() {
