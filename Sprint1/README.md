@@ -75,44 +75,37 @@
 ## IV) TAREAS DE IMPLEMENTACIÓN
 
 Resumen del codigo de produccion.
+| ID y nombre de la historia de usuario | AC ID | Nombre(s) de clase | Nombre(s) del metodo | Desarrollador | Estado | Notas |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| 1 - Iniciar Sesion | 1.1 | Session | setUsername() setPassword() signIn() | Omar Vite | Completado | El login se hace solo con nombre de usuario y contrasena |
+| | 1.2 | Session | getErrorMessage() | Omar Vite | Completado | El mensaje de error por el momento se muestra usando una alerta de js |
+| 2 - Registro de cuenta de usuario | 2.1 | Session | setUsername() setPassword() setEmail() signUp() | Omar Vite | Completado | Para el registro es necesario un correo electronico |
+| | 2.2 | Session | getErrorMessage() | Omar Vite | Completado | El error sucede cuando ya existe una cuenta con ese usuario o correo |
+| 3 - Cierre de Sesion | 3.1 | Session | signOut() getErrorMessage() | Omar Vite | Completado | En caso falle el cierre de sesion muestra una alerta |
+| 4 - Visualizacion del Tablero 8x8 | 4.1 | Board | getGrid() setGrid() | Piero Pilco | Completado | Se muestra un tablero 8x8 con fichas de color negras y rojas |
 
-| ID y nombre de la historia de usuario | AC ID | Nombre(s) de clase |                  Nombre(s) del metodo                   | Desarrollador | Estado     | Notas                                                                 |
-| :-----------------------------------: | :---: | :----------------: | :-----------------------------------------------------: | :-----------: | ---------- | --------------------------------------------------------------------- |
-|          1 - Iniciar Sesion           |  1.1  |       SignIn       |        setUsername() setPassword() handleLogin()        |   Omar Vite   | Completado | El login se hace solo con nombre de usuario y contrasena              |
-|                                       |  1.2  |       SignIn       |                    getErrorMessage()                    |   Omar Vite   | Completado | El mensaje de error por el momento se muestra usando una alerta de js |
-|   2 - Registro de cuenta de usuario   |  2.1  |       SignUp       | setUsername() setPassword() setEmail() handleRegister() |   Omar Vite   | Completado | Para el registro es necesario un correo electronico                   |
-|                                       |  2.2  |       SignUp       |                    getErrorMessage()                    |   Omar Vite   | Completado | El error sucede cuando ya existe una cuenta con ese usuario o correo  |
-|         3 - Cierre de Sesion          |  3.1  |       LogOut       |            handleLogOut() getErrorMessage()             |   Omar Vite   | Completado | En caso falle el cierre de sesion muestra una alerta                  |
-|                  4 -                  |       |                    |                           ()                            |               |            |                                                                       |
-|                  5 -                  |       |                    |                           ()                            |               |            |                                                                       |
-|                  6 -                  |       |                    |                           ()                            |               |            |                                                                       |
+- Evidencia (Clase Session & Clase Piece)
+
+![](images/1.png)
+![](images/2.png)
+![](images/3.png)
 
 Resumen del código de prueba automatizado (que corresponde directamente a algunos criterios de aceptación)
-
 | ID y nombre de la lista de usuario | AC ID | Nombre(s) de clase del código de prueba | Nombre(s) del método del código de prueba | Descripción del caso de prueba (entrada y salida esperada) | Estado | Desarrollador |
-| :--------------------------------: | :---: | :-------------------------------------: | :---------------------------------------: | :--------------------------------------------------------: | ------ | ------------- |
-|                 1                  |  1.1  |                                         |                                           |                                                            |        |               |
-|                                    |  1.2  |                                         |                                           |                                                            |        |               |
-|                 2                  |  2.1  |                                         |                                           |                                                            |        |               |
-|                                    |  2.2  |                                         |                                           |                                                            |        |               |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| 1 - Iniciar Sesion | 1.1 | Session | setUsername() setPassword() signIn() | Entrada: Usuario y Contrasena validas --- Salida: Se ha iniciado sesion correctamente | Completado | Omar Vite|
+| | 1.2 | Session | getErrorMessage() | Entrada: Usuario y contrasena no validos --- Salida: No se ha podido iniciar sesion | Completado | Omar Vite |
+| 2 - Registro de cuenta de usuario | 2.1 | Session | setUsername() setEmail() setPassword() signUp()| Entrada: Usuario , Correo y Contrasena validas --- Salida: Se ha registrado correctamente | Completado | Omar Vite |
+| | 2.2 | Session | getErroMessage() | Entrada: Usuario y/o Email no validos --- Salida: No se ha podido registrar | Completado | Omar Vite|
+| 3 - Cierre de Sesion | 3.1 | Session | signOut() | Entrada: Simulacion de cierre de sesion --- Salida: Cierre de sesion exitoso | Completado |Omar Vite |
+| 4 - Visualizacion del Tablero 8x8 | 4.1 | Board | | | | | | | |
 
-Resumen de casos de prueba manuales (que corresponden a algunos criterios de aceptación)
+- Evidencia (Green Tests)
 
-| ID y nombre de la lista de usuario | AC ID | Entrada de caso de prueba | Nombre(s) del método del código de prueba | Prueba de Oracle (resultado esperado) | Estado | Notas | Desarrollador |
-| :--------------------------------: | :---: | :-----------------------: | :---------------------------------------: | :-----------------------------------: | ------ | ----- | ------------- |
-|                 1                  |  1.1  |                           |                                           |                                       |        |       |               |
-|                                    |  1.2  |                           |                                           |                                       |        |       |               |
-|                 2                  |  2.1  |                           |                                           |                                       |        |       |               |
-|                                    |  2.2  |                           |                                           |                                       |        |       |               |
-
-Resumen de otras pruebas automatizadas o manuales (que no corresponden a los criterios de aceptación)
-
-| Numero | Entrada de prueba | Resultado esperado | Nombre de clase del código de prueba | Nombre del metodo del codigo de prueba | Estado | Desarrollador |
-| :----: | :---------------: | :----------------: | :----------------------------------: | :------------------------------------: | ------ | ------------- |
-|        |                   |                    |                                      |                                        |        |               |
-|        |                   |                    |                                      |                                        |        |               |
-|        |                   |                    |                                      |                                        |        |               |
-|        |                   |                    |                                      |                                        |        |               |
+![](images/4.png)
+![](images/5.png)
+![](images/6.png)
+![](images/7.png)
 
 ## V) ACTA DE REUNIÓN
 
