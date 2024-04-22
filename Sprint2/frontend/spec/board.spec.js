@@ -139,10 +139,10 @@ describe('Funcionalidad del tablero', () => {
         });
     });
 
-    // HU-8 Captura de más de una pieza en solamente un turno
+    // HU-9 Captura de más de una pieza en solamente un turno
     describe('Captura multiple en solamente un turno', () => {
 
-        // AC-8.1 Realizar captura multiple siendo peon
+        // AC-9.1 Realizar captura multiple siendo peon
         it('Realizar captura multiple siendo peon', () => {
             // Arrange: Estado inicial
             board = new Board([
@@ -185,7 +185,7 @@ describe('Funcionalidad del tablero', () => {
             expect(board.getTurnOwner()).toEqual('black');
         });
     
-        // AC-8.2 Realizar captura multiple siendo reina
+        // AC-9.2 Realizar captura multiple siendo reina
         it('Realizar captura multiple siendo reina', () => {
             // Arrange: Estado inicial
             board = new Board([
