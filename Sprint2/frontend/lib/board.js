@@ -82,7 +82,6 @@ class Board {
     multipleCapturesDetectionFlag(rowIndex, colIndex) {
         let hasMoreCaptures = false;
         let capturingMoves = new Array();
-        //[];
         let forwardDirection;
         let middlePieceRow, middlePieceCol;
 
@@ -171,6 +170,7 @@ class Board {
 
             const turnOwnerResult = this.turnOwner === "red" ? this.capturedPiecesCounter["red"] : this.capturedPiecesCounter["black"];
             actualizedCapturedPiecesCounterObject = { ...this.capturedPiecesCounter, [this.turnOwner]: turnOwnerResult + 1 };
+            this.setCapturedPiecesCounter(actualizedCapturedPiecesCounterObject);
             itCapturedFlag = true;
         }
 
@@ -199,8 +199,7 @@ class Board {
 
     calculateValidMoves(rowIndex, colIndex) {
         const piece = this.grid[rowIndex][colIndex];
-        let validMovesForPiece = new Array()
-        //= [];
+        let validMovesForPiece = new Array();
 
         if (piece.getColor() !== "none" && !this.grid[rowIndex][colIndex].getIsKing()) {
             const forwardDirection = piece.getColor() === 'red' ? -1 : 1;
