@@ -6,4 +6,4 @@ Integrantes
 
 Plataforma utilizada para seguir la metodología SCRUM
 
-https://sharing.clickup.com/9013192166/l/h/6-901302919544-1/9435a33d3080b27
+[ClickUp Board](https://sharing.clickup.com/9013192166/b/h/4-90130817302-2/908e9fe44a83472)
