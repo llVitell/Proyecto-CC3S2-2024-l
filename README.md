@@ -2,7 +2,7 @@
 
 Juego de damas con sesiones online hecho bajo la metodologia SCRUM
 
-Link del tablero grupal: [ClickUp](https://sharing.clickup.com/9013192166/b/h/4-90130817302-2/908e9fe44a83472)
+[Link del tablero grupal ClickUp](https://sharing.clickup.com/9013192166/b/h/4-90130817302-2/908e9fe44a83472)
 
 ## Integrantes
 - Pilco Reynoso Piero Fernando
