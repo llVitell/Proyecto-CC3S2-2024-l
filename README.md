@@ -1,6 +1,6 @@
 # Proyecto-CC3S2-2024-l
 
-Juego de damas con sesiones online hecho bajo la metodologia SCRUM
+Juego de damas online con sesiones de usuario y hecho bajo la metodologia SCRUM
 
 [Link del tablero grupal ClickUp](https://sharing.clickup.com/9013192166/b/h/4-90130817302-2/908e9fe44a83472)
 
