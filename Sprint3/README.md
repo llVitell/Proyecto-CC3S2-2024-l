@@ -97,7 +97,7 @@ Resumen del código de prueba automatizado (que corresponde directamente a algun
 
 ### Arquitectura de Software
 
-
+![](images/8.png)
 
 
 ### Algoritmos
@@ -127,7 +127,230 @@ Resumen del código de prueba automatizado (que corresponde directamente a algun
 
 ## V) HALLAZGOS DEL EJERCICIO DE REVISION FINAL
 
+### Lista de verificación 1: Estándares de codificación
 
+- **¿Existe alguna violación de las convenciones de nomenclatura?**
+
+No, el proyecto se ha desarrollado en su totalidad utilizando camelCase para variables, constantes, funciones y metodos. PascalCase para la nomenclatura de clases en general.
+
+Ejemplo de camelCase utilizado en el proyecto
+
+![](images/9.png)
+
+- **¿Todos los comentarios son significativos y válidos?**
+
+El codigo no ha sido comentado en su mayoria, solo en la logica del juego para tener una idea clara de lo que se esta haciendo y si nosotros los consideramos significativos y validos
+
+Ejemplo de comentarios escritos dentro del proyecto
+
+![](images/10.png)
+
+- **¿Se utiliza el mismo estilo para todas las llaves de los bloques de código?**
+
+No, en el proyecto se usó tanto las llaves seguidas asi como las funciones flecha
+
+
+- **¿Sangría consistente?**
+
+Si, se utilizo prettier como formateador de codigo para mantener la sangria igual para todos y asi mantener un mismo patron en cada commit que se realizaba
+
+### Lista de verificación 2: principios de diseño
+
+- **¿Tiene cada clase una buena abstracción y una buena interfaz de clase?**
+
+En general, las clases proporciona una buena abstracción e interfa. En el caso para manejar la autenticación de usuario podriamos considerar refactorizar el código para manejar la dependencia de useNavigate de una manera más adecuada, tal vez pasando la función de navegación como un argumento al constructor de la clase o manejándola fuera de la clase.
+
+![](images/11.png)
+
+- **¿Es apropiada la visibilidad de cada variable, método y clase (privada, protegida, pública, predeterminada)?** 
+
+Si, la visibilidad de cada elemento es apropiada según el diseño y el propósito de la clase Session. Las variables privadas garantizan el encapsulamiento de datos, mientras que los métodos públicos proporcionan una interfaz para interactuar con la clase de manera controlada.
+
+- **Diseño por contrato: para cada método público, ¿se sigue el Diseño por Contrato? En caso afirmativo, ¿la precondición especificada es razonable y está disponible?**
+
+En general no se define explícitamente precondiciones y postcondiciones (Diseño por Contrato) para los métodos públicos. Sin embargo, se pueden inferir precondiciones razonables para los métodos basadas en el comportamiento esperado . Sería beneficioso documentar estas precondiciones y postcondiciones de manera explícita para mejorar la claridad y la comprensión del código.
+
+- **¿Se viola el principio abierto-cerrado?**
+
+En la implementación actual de la clase Session, no se sigue completamente el principio OCP. Si se desea agregar nuevos métodos o funcionalidades relacionadas con la autenticación o la sesión, probablemente se necesitaría modificar la clase Session directamente.
+
+```typescript
+import { useNavigate } from 'react-router-dom';
+
+// Interfaz para definir una estrategia de autenticación
+interface AuthStrategy {
+  signIn(username: string, password: string): Promise<void>;
+  signUp(username: string, email: string, password: string): Promise<void>;
+  logOut(): Promise<void>;
+}
+
+class RestAuthStrategy implements AuthStrategy {
+  private navigate: any;
+
+  constructor() {
+    this.navigate = useNavigate();
+  }
+
+  async signIn(username: string, password: string) {
+  }
+
+  async signUp(username: string, email: string, password: string) {
+  }
+
+  async logOut() {
+  }
+}
+
+class Session {
+  private authStrategy: AuthStrategy;
+
+  constructor(authStrategy: AuthStrategy) {
+    this.authStrategy = authStrategy;
+  }
+
+  setUsername(username: string) {
+  }
+
+  setPassword(password: string) {
+  }
+
+  setEmail(email: string) {
+  }
+
+  async signIn() {
+    await this.authStrategy.signIn();
+  }
+
+  async signUp() {
+    await this.authStrategy.signUp();
+  }
+
+  async logOut() {
+    await this.authStrategy.logOut();
+  }
+}
+
+export default Session;
+
+```
+- **¿Se viola el principio de responsabilidad unica?**
+
+La clase Session en su implementación actual podría considerarse que viola el principio de responsabilidad única (SRP), ya que está encargada de múltiples responsabilidades relacionadas con la autenticación y la gestión de la sesión. Estas responsabilidades incluyen:
+
+1. Almacenar datos de sesión como nombre de usuario, contraseña, correo electrónico y mensaje de error.
+
+```ts
+// SessionData.ts
+class SessionData {
+  private username: string;
+  private password: string;
+  private email: string;
+  private errorMessage: string;
+
+  constructor() {
+    this.username = '';
+    this.password = '';
+    this.email = '';
+    this.errorMessage = '';
+  }
+
+  setUsername(username: string) {
+    this.username = username;
+  }
+
+  setPassword(password: string) {
+    this.password = password;
+  }
+
+  setEmail(email: string) {
+    this.email = email;
+  }
+
+  getErrorMessage() {
+    return this.errorMessage;
+  }
+}
+
+export default SessionData;
+
+
+```
+
+2. Realizar operaciones de inicio de sesión, registro y cierre de sesión.
+
+```ts
+// Authenticator.ts
+import { useNavigate } from 'react-router-dom';
+
+interface AuthStrategy {
+  signIn(username: string, password: string): Promise<void>;
+  signUp(username: string, email: string, password: string): Promise<void>;
+  logOut(): Promise<void>;
+}
+
+class RestAuthStrategy implements AuthStrategy {
+  private navigate: any;
+
+  constructor() {
+    this.navigate = useNavigate();
+  }
+
+  async signIn(username: string, password: string) {
+    // Lógica de autenticación
+  }
+
+  async signUp(username: string, email: string, password: string) {
+    // Lógica de registro
+  }
+
+  async logOut() {
+    // Lógica de cierre de sesión
+  }
+}
+
+export default RestAuthStrategy;
+
+```
+
+3. Manejar la navegación en la aplicación.
+
+```ts
+// Navigator.ts
+import { useNavigate } from 'react-router-dom';
+
+class Navigator {
+  private navigate: any;
+
+  constructor() {
+    this.navigate = useNavigate();
+  }
+
+  navigateTo(route: string) {
+    this.navigate(route);
+  }
+}
+
+export default Navigator;
+
+```
+
+### Lista de verificación 3: Olores de codigo
+
+- ¿Existe algún número mágico o constante sin nombre?
+
+
+- ¿Hay alguna variable global o de clase innecesaria?
+- ¿Hay código duplicado?
+- ¿Existen métodos largos?
+- ¿Algún método tiene una larga lista de parámetros?
+- ¿Hay alguna expresión demasiado compleja?
+- ¿Existe algún cambio o declaración if-then-else que deba reemplazarse con polimorfismo?
+- ¿Hay alguna variable o nombre de método cuya intención no esté clara?
+- ¿Existen métodos similares en varias clases?
+
+### Lista de verificación 4: Codificacion segura
+
+Por el momento no se ha implementando ningun tipo de seguridad ya sea en las password asi como en la prevencion de inyecciones SQL, por multiples razones como por ejemplo que el proyecto no se ha mandado a produccion.
 
 ## VI)  ACTAS DE TODAS LAS REUNIONES
 
