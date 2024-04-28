@@ -93,17 +93,41 @@ Resumen del código de prueba automatizado (que corresponde directamente a algun
 
 - Tablero de Juego
 
-### Arquitectura de Software
+![](images/3.png)
 
+### Arquitectura de Software
 
 
 
 
 ### Algoritmos
 
+- Algoritmo para los movimientos de captura de pieza
+
+![](images/4.png)
+
+- Algoritmo para seleccionar una pieza en un slot especifico
+
+![](images/5.png)
+
+- Algoritmo para mover una pieza simple
+
+![](images/6.png)
+
+- Algoritmo para calcular los movimientos validos ya sea de una pieza simple o de una reyna
+
+![](images/7.png)
+
 ### Extensibilidad
 
+- Jugabilidad online con usuarios de cualquier parte del mundo
+- Implementacion de historial de partidas
+- Mejorar la experiencia de juego con animaciones visuales de victoria o derrota
+- Implementacion de modos de juego
+
 ## V) HALLAZGOS DEL EJERCICIO DE REVISION FINAL
+
+
 
 ## VI)  ACTAS DE TODAS LAS REUNIONES
 
@@ -128,4 +152,4 @@ Resumen del código de prueba automatizado (que corresponde directamente a algun
 | :----------------------------: | :----------------------------: | 
 | Edward Alexander Canales Yarin |                            |              
 |  Piero Fernando Pilco Reynoso  |                            |              
-|   Omar Baldomero Vite Allca    |                            |              
+|   Omar Baldomero Vite Allca    |      Implementacion de sessiones con python y flask  - Uso de MySQL workbench - Testing con Jasmine - Uso de Clickup para el trabajo en equipo        |              
