@@ -17,15 +17,19 @@ class Board {
         validMovesList = [],
         turnOwner = "red",
         capturedPiecesCounter = { red: 0, black: 0 },
-        winnerPlayer = "none"
+        winnerPlayer = "none",
+        isMultiCaptureFlag = false,
+        multiCapturePiece = null
     ) {
         this.BOARD_SIZE = 8;
         this.grid = grid;
         this.selectedPiece = selectedPiece;
         this.validMovesList = validMovesList;
-        this.turnOwner = turnOwner
+        this.turnOwner = turnOwner;
         this.capturedPiecesCounter = capturedPiecesCounter;
         this.winnerPlayer = winnerPlayer;
+        this.isMultiCaptureFlag = isMultiCaptureFlag;
+        this.multiCapturePiece = multiCapturePiece;
     }
 
     getGrid() {
@@ -82,47 +86,28 @@ class Board {
 
     multipleCapturesDetectionFlag(rowIndex, colIndex) {
         let hasMoreCaptures = false;
-        let capturingMoves = new Array();
-        let forwardDirection;
-        let middlePieceRow, middlePieceCol;
+        let capturingMoves = [];
+        let isKing = this.grid[rowIndex][colIndex].getIsKing();
 
-        if (this.grid[rowIndex][colIndex].getColor() !== "none" && !this.grid[rowIndex][colIndex].getIsKing()) {
-            forwardDirection = this.grid[rowIndex][colIndex].getColor() === 'red' ? -1 : 1;
-            capturingMoves = [
-                { row: rowIndex + forwardDirection * 2, col: colIndex - 2 },
-                { row: rowIndex + forwardDirection * 2, col: colIndex + 2 },
-            ];
-        } else if (this.grid[rowIndex][colIndex].getColor() !== "none" && this.grid[rowIndex][colIndex].getIsKing()) {
-            capturingMoves = [
-                { row: rowIndex + 2, col: colIndex - 2 },
-                { row: rowIndex + 2, col: colIndex + 2 },
-                { row: rowIndex - 2, col: colIndex - 2 },
-                { row: rowIndex - 2, col: colIndex + 2 },
-            ];
+        if (this.grid[rowIndex][colIndex].getColor() !== "none") {
+            [, capturingMoves] = (isKing)
+                ? this.getKingMoves(rowIndex, colIndex)
+                : this.getPawnMoves(rowIndex, colIndex);
+
+            capturingMoves.forEach(move => {
+                const [row, col] = [move.row, move.col];
+                let [middlePieceRow, middlePieceCol] = this.getMiddlePieceIndexes(rowIndex, colIndex, isKing, move);
+                if (
+                    row >= 0 && row < this.BOARD_SIZE && col >= 0 && col < this.BOARD_SIZE &&
+                    this.grid[row][col].getColor() === 'none' &&
+                    this.grid[middlePieceRow][middlePieceCol].getColor() !== 'none' &&
+                    this.grid[middlePieceRow][middlePieceCol].getColor() !== this.turnOwner
+                ) {
+                    hasMoreCaptures = true;
+                    return;
+                }
+            });
         }
-
-        capturingMoves.forEach(move => {
-            const [row, col] = [move.row, move.col];
-
-            if (this.grid[rowIndex][colIndex].getColor() !== "none" && !this.grid[rowIndex][colIndex].getIsKing()) {
-                middlePieceRow = rowIndex + forwardDirection;
-                middlePieceCol = (colIndex + col) / 2;
-            } else if (this.grid[rowIndex][colIndex].getColor() !== "none" && this.grid[rowIndex][colIndex].getIsKing()) {
-                middlePieceRow = rowIndex + (move.row - rowIndex) / 2;
-                middlePieceCol = colIndex + (move.col - colIndex) / 2;
-            }
-
-            if (
-                row >= 0 && row < this.BOARD_SIZE && col >= 0 && col < this.BOARD_SIZE &&
-                this.grid[row][col].getColor() === 'none' &&
-                this.grid[middlePieceRow][middlePieceCol].getColor() !== 'none' &&
-                this.grid[middlePieceRow][middlePieceCol].getColor() !== this.turnOwner
-            ) {
-                hasMoreCaptures = true;
-                return;
-            }
-        });
-
         return hasMoreCaptures;
     }
 
@@ -132,20 +117,39 @@ class Board {
         }
 
         if (this.selectedPiece) {
-            if (this.selectedPiece.row === rowIndex && this.selectedPiece.col === colIndex) {
-                this.setSelectedPiece(null);
-                this.setValidMoves([]);
-                return;
-            }
-
-            if (this.validMovesList.some(move => move.row === rowIndex && move.col === colIndex)) {
-                this.movePiece(rowIndex, colIndex, this.selectedPiece);
-            }
+            this.selectedPieceEvents(rowIndex, colIndex, this.selectedPiece);
         } else {
-            if (this.grid[rowIndex][colIndex].getColor() !== 'none') {
-                this.setSelectedPiece({ row: rowIndex, col: colIndex });
-                this.calculateValidMoves(rowIndex, colIndex);
-            }
+            this.noSelectedPieceEvents(rowIndex, colIndex);
+        }
+    }
+
+    selectedPieceEvents(rowIndex, colIndex, selectedPiece) {
+        if (selectedPiece.row === rowIndex && selectedPiece.col === colIndex) {
+            this.setSelectedPiece(null);
+            this.setValidMoves([]);
+            return;
+        }
+
+        if (
+            this.isMultiCaptureFlag &&
+            (selectedPiece.row !== this.multiCapturePiece?.row || selectedPiece.col !== this.multiCapturePiece?.col)
+        ) {
+            return;
+        }
+
+        if (this.validMovesList.some(move => move.row === rowIndex && move.col === colIndex)) {
+            this.movePiece(rowIndex, colIndex, selectedPiece);
+        }
+    }
+
+    noSelectedPieceEvents(rowIndex, colIndex) {
+        if (this.isMultiCaptureFlag && rowIndex !== this.multiCapturePiece?.row && colIndex !== this.multiCapturePiece?.row) {
+            return;
+        }
+
+        if (this.grid[rowIndex][colIndex].getColor() !== 'none') {
+            this.setSelectedPiece({ row: rowIndex, col: colIndex });
+            this.handleValidMoves(rowIndex, colIndex);
         }
     }
 
@@ -190,7 +194,15 @@ class Board {
             return;
         }
 
-        if (!this.multipleCapturesDetectionFlag(rowIndex, colIndex) || !itCapturedFlag) {
+        if (this.isMultiCaptureFlag) {
+            this.isMultiCaptureFlag = false;
+            this.multiCapturePiece = null;
+        }
+
+        if (this.multipleCapturesDetectionFlag(rowIndex, colIndex) && itCapturedFlag) {
+            this.isMultiCaptureFlag = true;
+            this.multiCapturePiece = { row: rowIndex, col: colIndex };
+        } else {
             this.setTurnOwner(this.turnOwner === 'red' ? 'black' : 'red');
         }
 
@@ -198,61 +210,32 @@ class Board {
         this.setValidMoves([]);
     }
 
-    calculateValidMoves(rowIndex, colIndex) {
+    handleValidMoves(rowIndex, colIndex) {
         const piece = this.grid[rowIndex][colIndex];
-        let validMovesForPiece = new Array();
+        let validMovesForPiece = [];
 
-        if (piece.getColor() !== "none" && !this.grid[rowIndex][colIndex].getIsKing()) {
-            const forwardDirection = piece.getColor() === 'red' ? -1 : 1;
-            const pawnPossibleMoves = [
-                { row: rowIndex + forwardDirection, col: colIndex - 1 },
-                { row: rowIndex + forwardDirection, col: colIndex + 1 },
-            ];
-            const pawnCapturingMoves = [
-                { row: rowIndex + forwardDirection * 2, col: colIndex - 2 },
-                { row: rowIndex + forwardDirection * 2, col: colIndex + 2 },
-            ];
-            validMovesForPiece = this.getValidMovesToDo(pawnPossibleMoves, pawnCapturingMoves, false, rowIndex, colIndex);
-        } else if (piece.getColor() !== "none" && piece.getIsKing()) {
-            const kingDiagonalMoves = [
-                { row: rowIndex + 1, col: colIndex - 1 },
-                { row: rowIndex + 1, col: colIndex + 1 },
-                { row: rowIndex - 1, col: colIndex - 1 },
-                { row: rowIndex - 1, col: colIndex + 1 },
-            ];
-            const kingCapturingMoves = [
-                { row: rowIndex + 2, col: colIndex - 2 },
-                { row: rowIndex + 2, col: colIndex + 2 },
-                { row: rowIndex - 2, col: colIndex - 2 },
-                { row: rowIndex - 2, col: colIndex + 2 },
-            ];
-            validMovesForPiece = this.getValidMovesToDo(kingDiagonalMoves, kingCapturingMoves, true, rowIndex, colIndex);
+        if (piece.getColor() !== "none") {
+            validMovesForPiece = this.getValidMovesToDo(piece.getIsKing(), rowIndex, colIndex);
         }
+
         this.setValidMoves(validMovesForPiece);
     }
 
-    getValidMovesToDo(possibleMoves, capturingMoves, isKing, rowIndex, colIndex) {
-        const piece = this.grid[rowIndex][colIndex];
-        const forwardDirection = piece.getColor() === 'red' ? -1 : 1;
-        const validMovesForPiece = new Array();
-        //[];
+    getValidMovesToDo(isKing, rowIndex, colIndex) {
+        let possibleMoves, capturingMoves;
+        [possibleMoves, capturingMoves] = (isKing) ? this.getKingMoves(rowIndex, colIndex) : this.getPawnMoves(rowIndex, colIndex);
+        const validMovesForPiece = [];
+
         possibleMoves.forEach(move => {
             const [row, col] = [move.row, move.col];
             if (row >= 0 && row < this.BOARD_SIZE && col >= 0 && col < this.BOARD_SIZE && this.grid[row][col].getColor() === 'none') {
                 validMovesForPiece.push({ row, col });
             }
         });
+
         capturingMoves.forEach(move => {
             const [row, col] = [move.row, move.col];
-            let middlePieceRow, middlePieceCol;
-
-            if (isKing) {
-                middlePieceRow = rowIndex + (move.row - rowIndex) / 2;
-                middlePieceCol = colIndex + (move.col - colIndex) / 2;
-            } else {
-                middlePieceRow = rowIndex + forwardDirection;
-                middlePieceCol = (colIndex + col) / 2;
-            }
+            let [middlePieceRow, middlePieceCol] = this.getMiddlePieceIndexes(rowIndex, colIndex, isKing, move);
 
             if (
                 row >= 0 && row < this.BOARD_SIZE && col >= 0 && col < this.BOARD_SIZE &&
@@ -263,8 +246,55 @@ class Board {
                 validMovesForPiece.push({ row, col });
             }
         });
-
         return validMovesForPiece;
+    }
+
+    getMiddlePieceIndexes(currentRowIndex, currentColIndex, isKing, movePiece) {
+        const [moveRowIndex, moveColIndex] = [movePiece.row, movePiece.col];
+        let middlePieceRow, middlePieceCol;
+
+        if (isKing) {
+            middlePieceRow = currentRowIndex + (moveRowIndex - currentRowIndex) / 2;
+            middlePieceCol = currentColIndex + (moveColIndex - currentColIndex) / 2;
+        } else {
+            const forwardDirection = this.grid[currentRowIndex][currentColIndex].getColor() === 'red' ? -1 : 1;
+            middlePieceRow = currentRowIndex + forwardDirection;
+            middlePieceCol = (currentColIndex + moveColIndex) / 2;
+        }
+        return [middlePieceRow, middlePieceCol];
+    }
+
+    getPawnMoves(rowIndex, colIndex) {
+        const forwardDirection = this.grid[rowIndex][colIndex].getColor() === 'red' ? -1 : 1;
+        const pawnPossibleMoves = [
+            { row: rowIndex + forwardDirection, col: colIndex - 1 }, // Diagonal izq
+            { row: rowIndex + forwardDirection, col: colIndex + 1 }, // Diagonal der
+        ];
+        const pawnCapturingMoves = [
+            { row: rowIndex + forwardDirection * 2, col: colIndex - 2 }, // Diagonal izq
+            { row: rowIndex + forwardDirection * 2, col: colIndex + 2 }, // Diagonal der
+        ];
+        return [pawnPossibleMoves, pawnCapturingMoves];
+    }
+
+    getKingMoves(rowIndex, colIndex) {
+        const kingDiagonalMoves = [
+            // abajo
+            { row: rowIndex + 1, col: colIndex - 1 },
+            { row: rowIndex + 1, col: colIndex + 1 },
+            // arriba
+            { row: rowIndex - 1, col: colIndex - 1 },
+            { row: rowIndex - 1, col: colIndex + 1 },
+        ];
+        const kingCapturingMoves = [
+            // abajo
+            { row: rowIndex + 2, col: colIndex - 2 },
+            { row: rowIndex + 2, col: colIndex + 2 },
+            // arriba
+            { row: rowIndex - 2, col: colIndex - 2 },
+            { row: rowIndex - 2, col: colIndex + 2 },
+        ];
+        return [kingDiagonalMoves, kingCapturingMoves];
     }
 }
 
