@@ -2,7 +2,7 @@
 
 Juego de damas online con sesiones de usuario y hecho bajo la metodologia SCRUM
 
-[Link del tablero grupal ClickUp](https://sharing.clickup.com/9013192166/b/h/4-90130817302-2/908e9fe44a83472)
+[Link del tablero grupal ClickUp](https://sharing.clickup.com/9013192166/b/h/4-90130817302-2/908e9fe44a83472)  
 [Link de la PPT de la exposición grupal](https://docs.google.com/presentation/d/10-hep7xmMh1TS8fGQngew3RSpkJFFo0P/edit?usp=sharing&ouid=106633011391616836915&rtpof=true&sd=true)
 
 ## Integrantes
