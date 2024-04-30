@@ -341,17 +341,31 @@ export default Navigator;
 
 ### Lista de verificación 3: Olores de codigo
 
-- ¿Existe algún número mágico o constante sin nombre?
+- **¿Existe algún número mágico o constante sin nombre? ¿Hay alguna variable global o de clase innecesaria?**
 
+Todos los numeros magicos fueron detectados y solucionados como se corresponde
 
-- ¿Hay alguna variable global o de clase innecesaria?
-- ¿Hay código duplicado?
-- ¿Existen métodos largos?
-- ¿Algún método tiene una larga lista de parámetros?
-- ¿Hay alguna expresión demasiado compleja?
-- ¿Existe algún cambio o declaración if-then-else que deba reemplazarse con polimorfismo?
-- ¿Hay alguna variable o nombre de método cuya intención no esté clara?
-- ¿Existen métodos similares en varias clases?
+- **¿Hay código duplicado?**
+
+En un inicio si se encontro codigo duplicado sin embargo fue solucionado con los patrones de diseño 
+
+- **¿Existen métodos largos?**
+
+Si, la mayoria estan en la logica del juego.
+
+- **¿Algún método tiene una larga lista de parámetros?**
+
+A lo mucho los metodos tienen 3 parametros, como el metodo getValidMoves
+
+![](images/12.png)
+
+- **¿Hay alguna expresión demasiado compleja?**
+
+Tratamos de hacer el codigo lo mas simple posible y siempre bien comentado para que se pueda lee
+
+- **¿Existe algún cambio o declaración if-then-else que deba reemplazarse con polimorfismo?**
+
+El uso de polimorfismo es más relevante cuando hay comportamientos comunes entre diferentes clases, cosa que no pasa ya que el uso de if else que se hace en el proeyecto se basa en los metodos mismos.
 
 ### Lista de verificación 4: Codificacion segura
 

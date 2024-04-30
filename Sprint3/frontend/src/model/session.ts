@@ -1,94 +1,55 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable react-hooks/rules-of-hooks */
-import { useNavigate } from 'react-router-dom'
+import SessionData from './sessionData'
+import RestAuthStrategy from './authenticator'
+import AuthStrategy from './authenticator'
+import Navigator from './navigator'
 
 class Session {
-  private username: string
-  private password: string
-  private email: string
-  private errorMessage: string
-  private navigate: any
+  private sessionData: SessionData
+  private authStrategy: AuthStrategy
+  private navigator: Navigator
 
   constructor() {
-    this.username = ''
-    this.password = ''
-    this.email = ''
-    this.errorMessage = ''
-    this.navigate = useNavigate()
+    this.sessionData = new SessionData()
+    this.authStrategy = new RestAuthStrategy()
+    this.navigator = new Navigator()
   }
 
   setUsername(username: string) {
-    this.username = username
+    this.sessionData.setUsername(username)
   }
 
   setPassword(password: string) {
-    this.password = password
+    this.sessionData.setPassword(password)
   }
 
   setEmail(email: string) {
-    this.email = email
-  }
-
-  getErrorMessage() {
-    return this.errorMessage
+    this.sessionData.setEmail(email)
   }
 
   async signIn() {
-    const response = await fetch('http://localhost:5000/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        username: this.username,
-        password: this.password
-      })
-    })
-    const data = await response.json()
-    if (response.ok) {
-      alert(data.message)
-      this.navigate('/board')
-    } else {
-      this.errorMessage = data.message
-      alert(this.errorMessage)
+    await this.authStrategy.signIn(
+      this.sessionData.getUsername(),
+      this.sessionData.getPassword()
+    )
+    if (!this.sessionData.getErrorMessage()) {
+      this.navigator.navigateTo('/board')
     }
   }
 
   async signUp() {
-    const response = await fetch('http://localhost:5000/api/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        username: this.username,
-        email: this.email,
-        password: this.password
-      })
-    })
-    const data = await response.json()
-    if (response.ok) {
-      alert(data.message)
-    } else {
-      this.errorMessage = data.message
-      alert(this.errorMessage)
+    await this.authStrategy.signUp(
+      this.sessionData.getUsername(),
+      this.sessionData.getEmail(),
+      this.sessionData.getPassword()
+    )
+    if (!this.sessionData.getErrorMessage()) {
+      this.navigator.navigateTo('/board')
     }
   }
 
   async logOut() {
-    const response = await fetch('http://127.0.0.1:5000/api/logout', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    const data = await response.json()
-    if (response.ok) {
-      alert(data.message)
-      this.navigate('/')
-    } else {
-      alert('Error al cerrar sesión')
-    }
+    await this.authStrategy.logOut()
+    this.navigator.navigateTo('/')
   }
 }
 
